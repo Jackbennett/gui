@@ -1,0 +1,19 @@
+volumes:
+  node_modules_mender_gui:
+
+services:
+  watch:
+    environment:
+      NODE_ENV: development
+    image: mender-gui-dev
+    build:
+      context: .
+      target: build
+    volumes:
+      - type: bind
+        source: .
+        target: /usr/src/app
+      - type: volume
+        source: node_modules_mender_gui
+        target: /usr/src/app/node_modules
+    command: npm run watch
